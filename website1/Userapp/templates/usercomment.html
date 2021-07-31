@@ -1,0 +1,101 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title%}
+  Comment
+{% endblock title%}
+
+{% block description %}
+{{setting.description}}
+{% endblock description %}
+
+{% block keyword %}
+
+{% endblock keyword %}
+
+
+
+
+<!--Header area end wrapper-->
+{% block header %}
+   {% include 'header.html' %}
+{% endblock header %}
+
+
+ {% block another_content %}
+ <div id="breadcrum">
+    <div class="container">
+        <div>
+            <ul class="breadcrumb">
+                <li> <a href="">Home</a></li>
+                >>
+                <li class="active">User Comment</li>
+            </ul>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<div class="section">
+<div class="container">
+
+    {% if messages %} {% for message in messages %}
+    <div class="alert alert-{{message.tags }}" role="alert">
+        {{message}}
+    </div>
+    {% endfor %} {% endif %} 
+
+    <div class="page-section mb-60">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-xs-12 col-lg-3 mb-30">
+                    <h2>User Panel</h2>
+                    {% include 'user_panel.html'%}
+            </div>    
+            
+            <div class="col-sm-12 col-md-12 col-lg-9 col-xs-12">
+                <h2 class="text-center font-weight-bold">User Comment</h2>
+                <table class="shopping-cart-table table">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Item Image</th>
+                            <th class="text-center">Product name</th>
+                            <th class="text-center">Comment title</th>
+                            <th class="text-center">Comment</th>
+                            <th class="text-center">Comment status</th>
+                            <th class="text-center">Comment date</th>
+                            <th class="text-center">Action</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        {% for p in comment %}
+                            <tr>
+                                <td class="thumb text-center"><a href=""><img src="{{p.product.ImageUrl}}" alt="" height="50px"></a></td>
+                                <td class="text-center"><a href="">{{p.product.title}}</a></td>
+                                <td class="price text-center"><a href="">{{p.subject}}</a></td>
+                                <td class="status text-center"><a href="">{{p.comment}}</a></td>
+                                <td class="created text-center"><a href="">{{p.status}}</a></td>
+                                <td class="created text-center"><a href="">{{p.created_at}}</a></td>
+                                <td class="pull-right"><button class="btn btn-danger"><a href="{% url 'comment_delete' id=p.id %}" onclick="return confirm('Are you sure delete your comment?')">Delete</a></button></td>
+
+                            </tr>
+                        {% endfor %}
+                            
+                    </tbody>
+                </table>
+        </div>
+    </div>
+    </div>
+
+{% endblock another_content %}
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock footer %}
+            
